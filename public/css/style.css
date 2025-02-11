@@ -1,0 +1,392 @@
+* {
+    font-family: "Poppins";
+    font-weight: 300;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* #navbar */
+.navbar {
+    padding: 8px;
+    justify-content: flex-end;
+    background: linear-gradient(135deg, #000000 30%, #445e89 70%);
+
+}
+
+.navbar-collapse {
+    justify-content: space-between;
+    padding: 0px 10px 0px 10px;
+}
+
+.navbar .nav-item a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-family: sans-serif;
+    font-style: normal
+}
+
+.navbar .nav-item a:hover {
+    color: #ccc;
+    transition: 0.2s;
+
+}
+
+.row {
+    margin: 0;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    /* border: 2px solid #ccc; */
+    color: #ffffff;
+    border-radius: 7px;
+    font-style: normal;
+    max-width: 48%;
+    font-family: "Montserrat";
+    font-size: 0.843rem;
+    text-transform: uppercase;
+    border: 1px solid black;
+}
+
+.btn-primary:hover {
+    transition: 0.2s;
+    color: #fffafa;
+    background-color: #0056b3;
+}
+
+.form-control {
+    margin-top: 10px;
+    display: inline-block;
+    width: 26rem;
+    background-color: #ffffff;
+}
+
+#search-event {
+    padding: 20px 72px 0px 0px;
+    color: #fff;
+    font-family: "Poppins";
+    text-shadow: #000 2px 3px 2px;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+#search-Container {
+    background-image: url("../img/imagem-auditorio.jpg");
+    background-size: cover;
+    background-position-x: 32%;
+    background-position-y: 92%;
+    height: 400px;
+    padding: 50px;
+    text-align: center;
+    outline: none;
+}
+
+
+
+/* #events */
+#events-container {
+    background: linear-gradient(135deg, #000000, #699bd1);
+
+}
+
+#events-container h2 {
+    margin-top: 2rem;
+    font-size: 3rem;
+    text-align: center;
+    color: #fff;
+    font-weight: 300;
+}
+
+.event-description{
+   margin-bottom: 20px;
+}
+
+
+#events-container .subtitle {
+    color: #ddd9d9;
+    font-size: 1rem;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+}
+
+#events-container .card {
+    flex: 1 1 24%;
+    max-width: 20rem;
+    border-radius: 10px;
+    margin: 0.3rem;
+
+
+}
+
+#cards-container {
+    padding: 0px 15px 20px 0px;
+    display: flex;
+    
+}
+
+
+#cards-container img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.card {
+    border-radius: 20px;
+    border: 1px solid rgb(200, 200, 219);
+    padding: 15px;
+
+}
+
+.card-date {
+    padding: 5px 0px 0px 0px;
+    padding-left: 5px;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card .card-title {
+    color: #333333;
+    font-size: 1.3rem;
+    padding-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-participantes {
+    font-size: 0.8rem;
+    padding-left: 5px;
+}
+
+/* event create */
+.container-event {
+    background-color: #31598f;
+    border-radius: 20px;
+    border: 1px solid #252120;
+}
+
+.container-event label {
+    font-weight: 600;
+}
+
+.container-event h2 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    text-align: center;
+    font-weight: 300;
+    color: white;
+}
+
+.subtitle-event {
+    font-size: 1rem;
+    text-align: center; 
+    color: white;
+}
+.container-event textarea,
+.container-event select,
+.container-event input {
+    font-size: 13px;
+}
+
+
+label{
+    color: white;
+}
+
+.container-event {
+    font-size: 1.1rem;
+}
+
+/* mensagem */
+.mensagem {
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 20px;
+}
+
+/* About event */
+#image-container,
+#info-container {
+    margin-top: 20px;
+}
+
+#image-container img {
+    border-radius: 10px;
+}
+
+#info-container h1 {
+    font-size: 36px;
+    font-weight: 900;
+}
+
+#info-container {
+    margin: 0;
+    font-size: 14px;
+
+}
+
+
+#info-container h1 {
+    color: black;
+    font-weight: 700;
+    text-shadow: none
+}
+
+#info-container h3 {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#description-container h3 {
+    font-weight: bold;
+
+}
+
+#description-container {
+    margin-left: 10px;
+}
+
+#info-containerr,
+.bi-geo-alt-fill,
+.bi-people-fill,
+.bi-person-fill-gear,
+.bi-box-arrow-right,
+.bi-calendar-date-fill {
+    font-size: 15px;
+    margin-right: 5px;
+
+}
+
+tr{
+    text-align: center;
+}
+.evento-none {
+    color: white;
+    text-align: center;
+    font-weight: 800
+}
+
+#info-container,
+#event-submit {
+    margin: 20px 0;
+}
+
+
+#items-list {
+    list-style: none;
+    padding-left: 0;
+}
+.form-group{
+    color: white;
+}
+#items-list li {
+    display: flex;
+    gap: 5px;
+
+}
+
+
+/*dashboard */
+.dashboard-title-container {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.dashboard-events-container th {
+    width: 25%;
+}
+
+.dashboard-events-container {
+    padding: 20px;
+}
+.bi-trash3 {
+    color: red;
+}
+
+.bi-pencil-square {
+    color: #4A4A4A;
+}
+
+
+
+.btn-editar {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-editar:hover {
+    transition: 0.5s;
+    color: black;
+    transition: 0.3s;
+}
+
+.btn-delete {
+    display: flex;
+
+}
+
+.already-joined-msg{
+    font-size: 0.75rem;
+}
+
+.img-preview {
+    padding-left: 10px;
+    width: 20%;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+/*footer*/
+footer {
+    padding: 50px;
+    text-align: center;
+    background-color: #000000;
+    color: #fff;
+}
+
+
+
+container-event form {
+    justify-content: center;
+    align-items: center;
+    display: block;
+    text-align: center;
+}
+
+
+
+footer p {
+    margin-bottom: 0;
+}
+
+/* Fileponde */
+.filepond--label-action {
+    color: #007bff; /* Cor do texto do botão "Escolher arquivo" */
+}
+
+/* Estilo para o FilePond */
+.filepond--root {
+    background-color: #f9f9f9;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Estilo para o botão de ação */
+.filepond--label-action {
+    color: #007bff;
+    font-size: 16px;
+}
+
+/* Estilo para o label idle */
+.filepond--label-idle {
+    color: #888;
+    font-size: 14px;
+}
