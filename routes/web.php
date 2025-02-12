@@ -22,6 +22,7 @@ Route::get('/contato', function () {
 
 Route::post('/events/join/{id}', [EventsController::class, 'joinEvent'])->middleware('auth');
 
-
+// Nova rota para sair do evento
+Route::delete('/events/leave/{id}', [EventsController::class, 'leaveEvent'])->middleware('auth')->name('events.leave');
 
 Route::get('dashboard', [EventsController::class, 'dashboard'])->middleware('auth')->name('events.dashboard');

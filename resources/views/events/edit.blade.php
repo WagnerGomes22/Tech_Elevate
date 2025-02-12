@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="container-event mt-5 col-md-6 offset-md-3 p-5">
+    <div class="container-event mt-5 mb-5 col-md-6 offset-md-3 p-5">
         <h2>Editando o evento: <span class=" text-muted">{{$event->title}}</h2>
         <p class="text-center lead"></p>
         <p class="subtitle-event">Gerencie os detalhes do evento abaixo</p>

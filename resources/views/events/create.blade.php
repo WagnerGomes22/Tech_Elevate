@@ -17,7 +17,7 @@
 <body>
     <div class="container-event mt-5 mb-5 col-md-6 offset-md-3 p-5">
         <h2>Adicione um Evento</h2>
-        <p class="subtitle-event">coloque as informações sobre o seu evento</p>
+        <p class="subtitle-event">Coloque as informações sobre o seu evento</p>
         <div class="container-form">
             <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
