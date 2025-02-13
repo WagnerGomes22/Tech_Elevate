@@ -2,57 +2,9 @@
     #search-event {
         font-size: 1.5rem;
     }
-
-    .navbar-collapse {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        padding: 1rem;
-        background: white;
-        border-radius: 0 0 10px 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        width: 200px !important;
-        z-index: 1000;
+    #events-container h2{
+        font-size: 1.5rem;
     }
-
-    .navbar-nav {
-        margin-right: 0 !important;
-    }
-
-    .nav-item {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #eee;
-    }
-
-    .nav-item:last-child {
-        border-bottom: none;
-    }
-
-    .navbar-toggler {
-        margin-right: 1rem;
-        border: 1px solid #ccc;
-        padding: 0.25rem 0.5rem;
-    }
-
-    .navbar-toggler:focus {
-        box-shadow: none;
-        outline: none;
-    }
-
-    .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
-
-    .container {
-        position: relative;
-    }
-
-    .navbar {
-        padding: 0.5rem 1rem;
-    }
-}
-
-@media (max-width: 991px) {
     .navbar-collapse {
         position: absolute;
         top: 100%;
@@ -88,6 +40,124 @@
 
     .navbar {
         padding: 0.5rem 1rem;
+    }
+
+    .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        width: 200px !important;
+        z-index: 1000;
+    }
+
+
+    .nav-item {
+        padding: 0.5rem 0;
+
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+        outline: none;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 60px;
+        right: -300px;
+        width: 250px !important;
+        background: linear-gradient(135deg, #000000, #699bd1); /* Degradê escuro para azul */
+        padding: 1rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        z-index: 1000;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    .navbar-collapse.show {
+        right: 0;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .navbar-collapse.show::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        z-index: -1;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .nav-item {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.3s ease;
+    }
+
+    .navbar-collapse.show .nav-item {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .navbar-collapse.show .nav-item:nth-child(1) { transition-delay: 0.1s; }
+    .navbar-collapse.show .nav-item:nth-child(2) { transition-delay: 0.2s; }
+    .navbar-collapse.show .nav-item:nth-child(3) { transition-delay: 0.3s; }
+    .navbar-collapse.show .nav-item:nth-child(4) { transition-delay: 0.4s; }
+    .navbar-collapse.show .nav-item:nth-child(5) { transition-delay: 0.5s; }
+
+    .navbar {
+        position: relative;
+        width: 100%;
+    }
+
+    .navbar-toggler {
+        position: relative;
+        z-index: 1001;
+    }
+
+    .nav-item {
+        width: 100%;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
     }
 }
 

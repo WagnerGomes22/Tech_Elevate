@@ -8,7 +8,7 @@
 <div id="search-Container" class="col-md-12">
     <h1 id="search-event">Busque um evento</h1>
     <form action="{{ route('buscar') }}" method="GET">
-        <input type="text" name="search" class="form-control" placeholder="Procurar...">
+        <input type="text" name="search" class="form-control-search form-control" placeholder="Procurar...">
         <button type="submit" id="search" class="btn btn-primary btn-lg">Procurar</button>
     </form>
 </div>
@@ -21,6 +21,7 @@
             <img src="/img/events/{{ $event->image }}" alt="{{$event->title}}">
             <p class="card-date">{{ $event->date->format('d/m/Y') }}</p>
             <h4 class="card-title">{{ $event -> title }}</h4>
+            <p class="card-description">{{ Str::limit($event->description, 100, '...') }}</p>
             <p class="card-participantes"> {{ count($event->users) }} participantes</p>
             <a href="{{ route('event.show', $event->id) }}" class="btn btn-primary">Saiba mais</a>
         </div>
