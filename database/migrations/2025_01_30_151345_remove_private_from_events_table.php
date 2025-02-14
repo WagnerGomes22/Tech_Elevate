@@ -26,7 +26,7 @@ class RemovePrivateFromEventsTable extends Migration
     public function down()
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->boolean('private')->default(false);  // Caso queira voltar atrás, se necessário
+            $table->boolean('private')->default(0);  // Caso queira voltar atrás, se necessário
         });
     }
 }

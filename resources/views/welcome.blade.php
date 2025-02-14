@@ -9,7 +9,7 @@
     <h1 id="search-event">Busque um evento</h1>
     <form action="{{ route('buscar') }}" method="GET">
         <input type="text" name="search" class="form-control-search form-control" placeholder="Procurar...">
-        <button type="submit" id="search" class="btn btn-primary btn-lg">Procurar</button>
+        <button type="submit" id="search" class="btn btn-primary btn-lg ">Procurar</button>
     </form>
 </div>
 <div id="events-container" class="col-md-12">

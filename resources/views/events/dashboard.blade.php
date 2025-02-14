@@ -83,4 +83,10 @@
     @endif
 </div>
 
+<div class="img-preview">
+    @if($event->image)
+        <img src="/img/events/{{ $event->image }}" alt="{{ $event->title }}">
+    @endif
+</div>
+
 @endsection

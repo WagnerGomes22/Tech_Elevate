@@ -15,7 +15,15 @@ class Event extends Model
     ];
 
     protected $dates = ['date',];
-    protected $fillable =['title', 'description', 'date'];
+    protected $fillable = [
+        'title',
+        'description',
+        'city',
+        'date',
+        'image',
+        'items',
+        'user_id'
+    ];
     
 
     public function user() {

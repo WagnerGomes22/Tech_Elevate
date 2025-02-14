@@ -21,14 +21,9 @@
         <div class="container-form">
             <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-3">
-                    <label for="image" class="form-label">Adicione a imagem do seu evento: </label>
-                    <input type="file" id="image" name="image">
-                    @error('image')
-                    <div class="text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
+                <div class="form-group">
+                    <label  for="image">Imagem do Evento:</label>
+                    <input type="file" class="form-control-file" id="image" name="image" required>
                 </div>
                 <div class="mb-2">
                     <label for="title" class="form-label">Evento</label>
