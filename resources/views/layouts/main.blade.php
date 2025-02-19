@@ -26,43 +26,48 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse mg-3" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="/">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <!-- Logo fora do menu collapse -->
+                <a class="navbar-brand fixed-logo" href="/">
                     <img class="logo-header" src="/img/logo.png" width="80" height="80" alt="logo-Tech_Elevate">
                 </a>
-                <ul class="navbar-nav mt-2 mt-lg-0 me-5">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://127.0.0.1:8000">Eventos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/events/create">Criar evento</a>
-                    </li>
-                    @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Meus evento</a>
-                    </li>
-                    <li class="nav-item">
-                        <form action="/logout" method="POST">
-                            @csrf
-                            <a href="/logout" class="nav-link" onclick="event.preventDefault();this.closest('form').submit();">Sair
-                            </a>
-                        </form>
-                    </li>
-                    @endauth
-                    @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Entrar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Cadastrar</a>
-                    </li>
-                    @endguest
-                </ul>
+                
+                <!-- Botão hamburguer -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- Menu collapse -->
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/events/create">Criar evento</a>
+                        </li>
+                        @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Meus eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="/logout" method="POST">
+                                @csrf
+                                <a href="/logout" class="nav-link" onclick="event.preventDefault();this.closest('form').submit();">Sair</a>
+                            </form>
+                        </li>
+                        @endauth
+                        @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Entrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Cadastrar</a>
+                        </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
