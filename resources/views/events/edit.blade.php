@@ -22,7 +22,7 @@
             <form action="{{ route('events.update', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="mb-3">
+                <div class="mt-2 mb-3">
                     <label for="image" class="form-label">Imagem do Evento:</label>
                     <input type="file" name="image" id="image" class="form-control-file" onchange="previewImage(event)">
                     <img src="/img/events/{{ $event->image }}" alt="{{ $event->title }}" id="img-preview" class="img-preview">
@@ -49,14 +49,6 @@
                     <textarea class="form-control" name="description" id="description" placeholder="Digite a descrição">{{$event->description}}</textarea>
                 </div>
 
-                <div class="mb-2">
-                    <label for="title" class="form-label">Evento privado?</label>
-                    <select name="private" id="private" class="form-control">
-                        <option value="1" {{ $event->private == 1 ? 'selected' : '' }}>Sim</option>
-                        <option value="0" {{ $event->private == 0 ? 'selected' : '' }}>Não</option>
-
-                    </select>
-                </div>
                 <div class="mb-2">
                     <label for="title" class="form-label">Adicione itens de infraestrutura:</label>
 

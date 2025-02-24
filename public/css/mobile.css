@@ -82,6 +82,12 @@
         padding: 0;
         margin-right: 0;
     }
+    .btn-editar{
+        font-size: 12px;
+    }
+    .btn-delete{
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 991px) {

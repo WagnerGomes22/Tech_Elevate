@@ -15,6 +15,11 @@
 <div id="events-container" class="col-md-12">
     <h2>Próximos Eventos</h2>
     <p class="subtitle">Veja os eventos dos próximos dias</p>
+    
+    <!-- Event count com o mesmo estilo para ambas as views -->
+    <div class="events-count">
+        <p>Temos <strong>{{ count($events) }}</strong> eventos em nossa plataforma</p>
+    </div>
 
     <!-- Desktop View -->
     <div class="d-none d-md-block">
@@ -34,9 +39,6 @@
 
     <!-- Mobile View com Swiper -->
     <div class="d-block d-md-none">
-        <!-- Debug info -->
-        <p class="events-count">Encontrados <strong>{{ count($events) }}</strong> eventos</p>
-
         @if(count($events) > 2)
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">

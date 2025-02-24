@@ -148,13 +148,13 @@
 
 }
 
-
 #cards-container img {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
 
 .card {
+    cursor: pointer;
     border-radius: 20px;
     border: 1px solid rgb(200, 200, 219);
     padding: 15px;
@@ -230,12 +230,12 @@
 
 .container-event h2 {
     font-size: 2rem;
-    
+
     letter-spacing: 1px;
     text-align: center;
     font-weight: 300;
     color: white;
-    
+
 }
 
 .subtitle-event {
@@ -411,13 +411,14 @@ tr {
 
 /*footer*/
 footer {
-    padding: 50px;
-    text-align: center;
+    margin-top: auto;
     background-color: #000000;
     color: #fff;
+    border-top: 1px solid #333;
+    padding: 30px;
+    text-align: center;
+    width: 100%;
 }
-
-
 
 container-event form {
     justify-content: center;
@@ -426,37 +427,10 @@ container-event form {
     text-align: center;
 }
 
-
-
 footer p {
     margin-bottom: 0;
 }
 
-/* Fileponde */
-.filepond--label-action {
-    color: #007bff;
-    /* Cor do texto do botão "Escolher arquivo" */
-}
-
-/* Estilo para o FilePond */
-.filepond--root {
-    background-color: #f9f9f9;
-    border: 2px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-/* Estilo para o botão de ação */
-.filepond--label-action {
-    color: #007bff;
-    font-size: 16px;
-}
-
-/* Estilo para o label idle */
-.filepond--label-idle {
-    color: #888;
-    font-size: 14px;
-}
 
 .card-description {
     font-size: 14px;
@@ -478,4 +452,32 @@ footer p {
     transform: scale(1);
 }
 
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
+/* Estilo atualizado para o contador de eventos */
+.events-count {
+    font-size: 0.9rem;
+    color: #757575;
+    text-align: center;
+    padding: 6px 12px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin: 0.5rem auto 1rem;
+    max-width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.events-count p {
+    margin-bottom: 5px;
+}
+
+.events-count strong {
+    font-weight: 600;
+    color: #757575;
+}
