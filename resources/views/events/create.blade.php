@@ -25,7 +25,7 @@
                     <label  for="image">Imagem do Evento:</label>
                     <input type="file" class="form-control-file" id="image" name="image" required>
                 </div>
-                <div class="mb-2">
+                <div class="mt-2 mb-2">
                     <label for="title" class="form-label">Evento</label>
                     <input type="text" name="title" class="form-control" id="title" placeholder="Digite o titulo do evento" value="{{ old('title') }}">
                     @error('title')

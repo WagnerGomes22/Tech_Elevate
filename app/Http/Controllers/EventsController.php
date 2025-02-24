@@ -59,33 +59,21 @@ class EventsController extends Controller
         ],  $mensagem);
 
         $event = new Event;
-
-        $event->title = $request->title;
-        $event->city = $request->city;
-        $event->description = $request->description;
+        $event->fill($request->only(['title', 'city', 'description', 'date']));
         $event->items = $request->items ?? [];
-        $event->date = $request->date;
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            // Obter o arquivo de imagem
             $requestImage = $request->file('image');
-    
-            // Obter a extensão do arquivo
             $extension = $requestImage->extension();
-    
-            // Gerar um nome único para o arquivo
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-    
-            // Mover a imagem para o diretório 'img/events'
-            $requestImage->storeAs('public/img/events', $imageName); // Usando Storage::storeAs
-    
-            // Salvar o nome da imagem no banco
+            
+            // Salva a imagem diretamente na pasta public
+            $requestImage->move(public_path('img/events'), $imageName);
+            
             $event->image = $imageName;
         }
 
-        $user = auth()->user();
-        $event->user_id = $user->id;
-
+        $event->user_id = auth()->id();
         $event->save();
 
         return redirect('/')->with('mensagem', 'Evento cadastrado com sucesso!');
@@ -148,39 +136,47 @@ class EventsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->except('_token', '_method'); // Remove _token do array
-
         $event = Event::findOrFail($id);
-        $event->update($data);
-       
+        
+        // Validação
         $request->validate([
             'title' => 'required|string|max:255',
             'date' => 'required|date',
             'city' => 'required|string|max:255',
             'description' => 'required|string',
-            // Não adicione validação para 'items'
+            'image' => 'nullable|image|max:2048', // Mudado para nullable
         ]);
-        $event->title = $request->title;
-        $event->city = $request->city;
-        $event->description = $request->description;
-        $event->items = $request->items;
-        $event->date = $request->date;
 
-        if ($event->image && file_exists(public_path('img/events/' . $event->image))) {
-            unlink(public_path('img/events/' . $event->image));
+        // Atualiza os dados básicos
+        $event->fill($request->only(['title', 'city', 'description', 'date']));
+        $event->items = $request->items ?? [];
+
+        // Verifica se uma nova imagem foi enviada
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            try {
+                // Remove a imagem antiga se existir
+                if ($event->image && file_exists(public_path('img/events/' . $event->image))) {
+                    unlink(public_path('img/events/' . $event->image));
+                }
+
+                $requestImage = $request->file('image');
+                $extension = $requestImage->extension();
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+                
+                $requestImage->move(public_path('img/events'), $imageName);
+                $event->image = $imageName;
+            } catch (\Exception $e) {
+                return redirect()
+                    ->back()
+                    ->with('error', 'Erro ao fazer upload da imagem: ' . $e->getMessage());
+            }
         }
-        
-
-            $requestImage = $request->image;
-            $extension = $requestImage->extension();
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-            $requestImage->move(public_path('img/events'), $imageName);
-            $event->image = $imageName;
-        
 
         $event->save();
 
-        return redirect()->route('events.dashboard')->with('success', 'Evento atualizado!');
+        return redirect()
+            ->route('events.dashboard')
+            ->with('msg', 'Evento atualizado com sucesso!');
     }
 
     public function joinEvent($id) {
