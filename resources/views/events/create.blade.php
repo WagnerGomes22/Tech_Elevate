@@ -12,6 +12,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário-evento</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        select[multiple] {
+            min-height: 150px;
+            padding: 8px;
+        }
+
+        select[multiple] option {
+            padding: 5px;
+            margin: 2px 0;
+            border-radius: 4px;
+        }
+
+        select[multiple] option:checked {
+            background-color: #0d6efd;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -88,6 +105,26 @@
                     </div>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="tags">Tags do Evento:</label>
+                    <select name="tags[]" id="tags" class="form-select" multiple>
+                        <option value="frontend">Frontend</option>
+                        <option value="backend">Backend</option>
+                        <option value="devops">DevOps</option>
+                        <option value="cloud">Cloud</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="web">Web</option>
+                        <option value="design">Design</option>
+                        <option value="ux/ui">UX/UI</option>
+                        <option value="data science">Data Science</option>
+                        <option value="machine learning">Machine Learning</option>
+                        <option value="blockchain">Blockchain</option>
+                        <option value="segurança">Segurança</option>
+                        <option value="infraestrutura">Infraestrutura</option>
+                    </select>
+                    <small class="form-text text-muted">Pressione Ctrl (ou Cmd no Mac) para selecionar múltiplas tags</small>
+                </div>
+
                 <button type="submit" class="btn btn-primary enviar" value="Criar Evento">Enviar</button>
             </form>
         </div>
