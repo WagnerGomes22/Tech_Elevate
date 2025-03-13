@@ -55,7 +55,7 @@ class EventsController extends Controller
             'date' => 'required|date',
             'city' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'required|image|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ],  $mensagem);
 
         $event = new Event;
@@ -145,9 +145,9 @@ class EventsController extends Controller
             'date' => 'required|date',
             'city' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|max:2048', // Mudado para nullable
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        
+
         $event->tech_tags = $request->tech_tags ?? [];
         // Atualiza os dados básicos
         $event->fill($request->only(['title', 'city', 'description', 'date']));

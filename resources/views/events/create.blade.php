@@ -24,7 +24,11 @@
                 <div class="form-group">
                     <label for="image">Imagem do Evento:</label>
                     <input type="file" class="form-control-file" id="image" name="image" required>
-                    
+                    @error('image')
+                    <div class="text-danger">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
                 <div class="mt-2 mb-2">
                     <label for="title" class="form-label">Evento</label>
@@ -105,7 +109,7 @@
                             <input type="checkbox" name="tech_tags[]" value="DevOps"> DevOps
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Mobile"> Mobile
+                            <input type="checkbox" name="tech_tags[]" value="Inteligência Artificial"> Inteligência Artificial
                         </div>
                         @error('tech_tags')
                         <div class="text-danger">

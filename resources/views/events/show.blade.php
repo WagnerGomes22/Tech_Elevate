@@ -7,7 +7,7 @@
 <div class="col-md-10 offset-md-1 mt-5">
     <div class="row">
         <div id="image-container" class="col-md-6">
-            <img src="/img/events/{{ $event->image}}" class="img-fluid" alt="{{ $event->title }}">
+            <img src="/img/events/{{ $event->image}}" class="img-fluid max-height-400" alt="{{ $event->title }}">
             <div class="col-md-12 mt-3" id="description-container">
                 <h3>Sobre o evento:</h3>
                 <p class="event-description">{{$event->description}}</p>
@@ -22,7 +22,7 @@
             @if($event->tech_tags && count($event->tech_tags) > 0)
             <div class="tech-tags-container mt-2">
                 <h3 class="tags">Tecnologias:</h3>
-                <div class="tech-tags">
+                <div class="tech-tags pb-2">
                     @foreach($event->tech_tags as $tag)
                     <span class="badge bg-info text-white me-2 mb-2">{{ $tag }}</span>
                     @endforeach

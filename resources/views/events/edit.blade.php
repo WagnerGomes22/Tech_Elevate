@@ -89,23 +89,22 @@
                         </div>
                         @enderror
                     </div>
-                    
                     <div class="col-md-6">
                         <label class="form-label">Tags de Tecnologia:</label>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Cloud" {{ in_array('Cloud', $event->tech_tags) ? 'checked' : '' }}> Cloud
+                            <input type="checkbox" name="tech_tags[]" value="Cloud"> Cloud
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Back-end" {{ in_array('Back-end', $event->tech_tags) ? 'checked' : '' }}> Back-end
+                            <input type="checkbox" name="tech_tags[]" value="Back-end"> Back-end
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Front-end" {{ in_array('Front-end', $event->tech_tags) ? 'checked' : '' }}> Front-end
+                            <input type="checkbox" name="tech_tags[]" value="Front-end"> Front-end
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="DevOps" {{ in_array('DevOps', $event->tech_tags) ? 'checked' : '' }}> DevOps
+                            <input type="checkbox" name="tech_tags[]" value="DevOps"> DevOps
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Mobile" {{ in_array('Mobile', $event->tech_tags) ? 'checked' : '' }}> Mobile
+                            <input type="checkbox" name="tech_tags[]" value="Inteligência Artificial"> Inteligência Artificial
                         </div>
                         @error('tech_tags')
                         <div class="text-danger">

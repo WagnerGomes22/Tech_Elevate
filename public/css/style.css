@@ -158,8 +158,8 @@
 
 .badge {
     font-size: 0.9rem;
-    padding: 0,2 0.7rem;
-    margin-bottom: 0.5rem;
+    padding: 10px 10px 10px;
+
     display: inline-block;
 }
 
@@ -292,6 +292,9 @@ label {
     margin-top: 20px;
 }
 
+.text-danger{
+    font-weight: bold;
+}
 #image-container img {
     border-radius: 10px;
 }
