@@ -11,7 +11,8 @@ class Event extends Model
     use HasFactory;
 
     protected $casts = [
-        'items' => 'array'
+        'items' => 'array',
+        'tech_tags' => 'array'
     ];
 
     protected $dates = ['date',];

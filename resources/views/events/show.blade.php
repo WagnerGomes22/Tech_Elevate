@@ -8,6 +8,10 @@
     <div class="row">
         <div id="image-container" class="col-md-6">
             <img src="/img/events/{{ $event->image}}" class="img-fluid" alt="{{ $event->title }}">
+            <div class="col-md-12 mt-3" id="description-container">
+                <h3>Sobre o evento:</h3>
+                <p class="event-description">{{$event->description}}</p>
+            </div>
         </div>
         <div id="info-container" class="col-md-6">
             <h1>{{ $event->title }}</h1>
@@ -15,6 +19,16 @@
             <p class="event-city"><i class="bi bi-geo-alt-fill"></i>{{$event->city}}</p>
             <p class=" events-participants"><i class="bi bi-people-fill text-black"></i>{{ count($event->users)}}</p>
             <p class="event-owner"><i class="bi bi-person-fill-gear"></i>{{$event->user->name}}</p>
+            @if($event->tech_tags && count($event->tech_tags) > 0)
+            <div class="tech-tags-container mt-2">
+                <h3 class="tags">Tecnologias:</h3>
+                <div class="tech-tags">
+                    @foreach($event->tech_tags as $tag)
+                    <span class="badge bg-info text-white me-2 mb-2">{{ $tag }}</span>
+                    @endforeach
+                </div>
+            </div>
+            @endif
             @if(!$hasUserJoined)
             <form action="/events/join/{{ $event->id }}" method="POST">
                 @csrf
@@ -38,11 +52,9 @@
                 </ul>
             </div>
         </div>
+
     </div>
-    <div class="col-md-12" id="description-container">
-        <h3>Sobre o evento:</h3>
-        <p class="event-description">{{$event->description}}</p>
-    </div>
+
 </div>
 
 

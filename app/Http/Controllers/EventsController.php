@@ -62,14 +62,16 @@ class EventsController extends Controller
         $event->fill($request->only(['title', 'city', 'description', 'date']));
         $event->items = $request->items ?? [];
 
+        $event->tech_tags = $request->tech_tags ?? [];
+
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $requestImage = $request->file('image');
             $extension = $requestImage->extension();
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-            
+
             // Salva a imagem diretamente na pasta public
             $requestImage->move(public_path('img/events'), $imageName);
-            
+
             $event->image = $imageName;
         }
 
@@ -79,14 +81,14 @@ class EventsController extends Controller
         return redirect('/')->with('mensagem', 'Evento cadastrado com sucesso!');
     }
 
-   
+
 
 
     public function show($id)
     {
 
         $event = Event::findOrFail($id);
-      
+
         $event->items = $event->items ?? [];
 
         $user = auth()->user();
@@ -94,7 +96,6 @@ class EventsController extends Controller
         if (auth()->check()) {
             $user = auth()->user();
             $hasUserJoined = $user->eventsParticipant()->where('events.id', $id)->exists();
-
         }
 
         return view('events.show', [
@@ -103,7 +104,7 @@ class EventsController extends Controller
         ]);
     }
 
-    
+
 
     public function dashboard()
     {
@@ -128,7 +129,7 @@ class EventsController extends Controller
         $user = auth()->user();
         $event = Event::findOrFail($id);
 
-        if($user->id != $event->user_id) {
+        if ($user->id != $event->user_id) {
             return redirect('/dashboard');
         }
         return view('events.edit', ['event' => $event]);
@@ -137,7 +138,7 @@ class EventsController extends Controller
     public function update(Request $request, $id)
     {
         $event = Event::findOrFail($id);
-        
+
         // Validação
         $request->validate([
             'title' => 'required|string|max:255',
@@ -146,7 +147,8 @@ class EventsController extends Controller
             'description' => 'required|string',
             'image' => 'nullable|image|max:2048', // Mudado para nullable
         ]);
-
+        
+        $event->tech_tags = $request->tech_tags ?? [];
         // Atualiza os dados básicos
         $event->fill($request->only(['title', 'city', 'description', 'date']));
         $event->items = $request->items ?? [];
@@ -162,7 +164,7 @@ class EventsController extends Controller
                 $requestImage = $request->file('image');
                 $extension = $requestImage->extension();
                 $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-                
+
                 $requestImage->move(public_path('img/events'), $imageName);
                 $event->image = $imageName;
             } catch (\Exception $e) {
@@ -179,27 +181,27 @@ class EventsController extends Controller
             ->with('msg', 'Evento atualizado com sucesso!');
     }
 
-    public function joinEvent($id) {
+    public function joinEvent($id)
+    {
 
         $user = auth()->user();
 
         $user->eventsParticipant()->attach($id);
 
         $event = Event::findOrFail($id);
-        
-        
+
+
         return redirect('/dashboard')->with('msg', 'Você esta participando do evento: ' . $event->title);
+    }
 
-    }   
-
-   public function leaveEvent($id) {
+    public function leaveEvent($id)
+    {
         $user = auth()->user();
 
         $user->eventsParticipant()->detach($id);
 
         $event = Event::findOrFail($id);
-        
+
         return redirect('/dashboard')->with('msg', 'Você saiu do evento: ' . $event->title);
     }
-    
 }

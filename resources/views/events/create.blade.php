@@ -12,23 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário-evento</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        select[multiple] {
-            min-height: 150px;
-            padding: 8px;
-        }
-
-        select[multiple] option {
-            padding: 5px;
-            margin: 2px 0;
-            border-radius: 4px;
-        }
-
-        select[multiple] option:checked {
-            background-color: #0d6efd;
-            color: white;
-        }
-    </style>
 </head>
 
 <body>
@@ -39,8 +22,9 @@
             <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label  for="image">Imagem do Evento:</label>
+                    <label for="image">Imagem do Evento:</label>
                     <input type="file" class="form-control-file" id="image" name="image" required>
+                    
                 </div>
                 <div class="mt-2 mb-2">
                     <label for="title" class="form-label">Evento</label>
@@ -81,48 +65,54 @@
                     </div>
                     @enderror
                 </div>
-
-                <div class="mb-2">
-                    <label for="title" class="form-label">Adicione itens de infraestrutura:</label>
-                    <div class="form-group">
-                        <input type="checkbox" name="items[]" value="Cadeiras"> Cadeiras
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <label class="form-label">Adicione itens de infraestrutura:</label>
+                        <div class="form-group">
+                            <input type="checkbox" name="items[]" value="Cadeiras"> Cadeiras
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="items[]" value="Palco"> Palco
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="items[]" value="Cerveja gratis"> Cerveja grátis
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="items[]" value="Open food"> Open Food
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="items[]" value="Brindes"> Brindes
+                        </div>
+                        @error('items')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="items[]" value="Palco"> Palco
+                    
+                    <div class="col-md-6">
+                        <label class="form-label">Tags de Tecnologia:</label>
+                        <div class="form-group">
+                            <input type="checkbox" name="tech_tags[]" value="Cloud"> Cloud
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="tech_tags[]" value="Back-end"> Back-end
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="tech_tags[]" value="Front-end"> Front-end
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="tech_tags[]" value="DevOps"> DevOps
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="tech_tags[]" value="Mobile"> Mobile
+                        </div>
+                        @error('tech_tags')
+                        <div class="text-danger">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="items[]" value="Cerveja gratis"> Cerveja grátis
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="items[]" value="Open food"> Open Food
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="items[]" value="Brindes"> Brindes
-                    </div>
-                    @error('items')
-                    <div class="text-danger">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="tags">Tags do Evento:</label>
-                    <select name="tags[]" id="tags" class="form-select" multiple>
-                        <option value="frontend">Frontend</option>
-                        <option value="backend">Backend</option>
-                        <option value="devops">DevOps</option>
-                        <option value="cloud">Cloud</option>
-                        <option value="mobile">Mobile</option>
-                        <option value="web">Web</option>
-                        <option value="design">Design</option>
-                        <option value="ux/ui">UX/UI</option>
-                        <option value="data science">Data Science</option>
-                        <option value="machine learning">Machine Learning</option>
-                        <option value="blockchain">Blockchain</option>
-                        <option value="segurança">Segurança</option>
-                        <option value="infraestrutura">Infraestrutura</option>
-                    </select>
-                    <small class="form-text text-muted">Pressione Ctrl (ou Cmd no Mac) para selecionar múltiplas tags</small>
                 </div>
 
                 <button type="submit" class="btn btn-primary enviar" value="Criar Evento">Enviar</button>
@@ -133,7 +123,5 @@
 </body>
 
 </html>
-
-
 
 @endsection
