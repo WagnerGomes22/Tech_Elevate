@@ -159,13 +159,13 @@
 .badge {
     font-size: 0.9rem;
     padding: 10px 10px 10px;
-
     display: inline-block;
 }
 
 .badge.bg-info {
     background-color: #17a2b8 !important;
     color: white !important;
+    margin:3px;
 }
 
 .card {
@@ -226,6 +226,7 @@
 .card-participantes {
     color: #555;
     font-size: 0.9rem;
+    margin-top: 7px;
     margin-bottom: 15px;
 }
 
@@ -509,7 +510,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    /* Espaço entre os botões */
+
 }
 
 /* Ajuste para os botões na célula de ações */
