@@ -1,5 +1,4 @@
-/* Media queries organized by breakpoint */
-/* Mobile styles (max-width: 767px) */
+
 @media (max-width: 767px) {
     /* Typography adjustments */
     #search-event,
@@ -7,6 +6,7 @@
     .container-event h2 {
         font-size: 1.5rem;
     }
+   
     
     #info-container h1 {
         text-align: center;
@@ -100,7 +100,7 @@
     
     .card img {
         width: 100%;
-        height: 200px;
+        height: auto;
         object-fit: cover;
     }
     
