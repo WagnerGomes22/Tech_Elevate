@@ -23,8 +23,10 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
+                    <p class="fw-bold">Imagem atual: <span class="text-primary">{{ $event->image }}</span></p>
                     <label for="image">Imagem do Evento:</label>
                     <input type="file" class="form-control-file" id="image" name="image">
+
                 </div>
                 <div class="mt-2 mb-2">
                     <label for="title" class="form-label">Evento</label>
@@ -38,7 +40,7 @@
 
                 <div class="mb-2">
                     <label for="date" class="form-label">Data</label>
-                    <input type="date" name="date" class="form-control" id="date" value="{{ old('date', $event->date) }}">
+                    <input type="date" name="date" class="form-control" id="date" value="{{ old('date', \Carbon\Carbon::parse($event->date)->format('Y-m-d')) }}">
                     @error('date')
                     <div class="text-danger">
                         {{ $message }}
@@ -92,19 +94,19 @@
                     <div class="col-md-6">
                         <label class="form-label">Tags de Tecnologia:</label>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Cloud"> Cloud
+                            <input type="checkbox" name="tech_tags[]" value="Cloud" {{ in_array('Cloud', $event->tech_tags) ? 'checked' : '' }}> Cloud
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Back-end"> Back-end
+                            <input type="checkbox" name="tech_tags[]" value="Back-end" {{ in_array('Back-end', $event->tech_tags) ? 'checked' : '' }}> Back-end
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Front-end"> Front-end
+                            <input type="checkbox" name="tech_tags[]" value="Front-end" {{ in_array('Front-end', $event->tech_tags) ? 'checked' : '' }}> Front-end
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="DevOps"> DevOps
+                            <input type="checkbox" name="tech_tags[]" value="DevOps" {{ in_array('DevOps', $event->tech_tags) ? 'checked' : '' }}> DevOps
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="tech_tags[]" value="Inteligência Artificial"> Inteligência Artificial
+                            <input type="checkbox" name="tech_tags[]" value="Inteligência Artificial" {{ in_array('Inteligência Artificial', $event->tech_tags) ? 'checked' : '' }}> Inteligência Artificial
                         </div>
                         @error('tech_tags')
                         <div class="text-danger">

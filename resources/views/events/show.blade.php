@@ -7,7 +7,7 @@
 <div class="col-md-10 offset-md-1 mt-5">
     <div class="row">
         <div id="image-container" class="col-md-6">
-            <img src="/img/events/{{ $event->image}}" class="img-fluid max-height-400" alt="{{ $event->title }}">
+            <img src="/img/events/{{ $event->image}}" class="img-fluid w-100 max-height-100" alt="{{ $event->title }}">
             <div class="col-md-12 mt-3" id="description-container">
                 <h3>Sobre o evento:</h3>
                 <p class="event-description">{{$event->description}}</p>

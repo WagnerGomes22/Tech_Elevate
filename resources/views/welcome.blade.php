@@ -103,7 +103,7 @@
                     <img src="/img/events/{{ $event->image }}" alt="{{$event->title}}">
                     <p class="card-date">{{ $event->date->format('d/m/Y') }}</p>
                     <h4 class="card-title">{{ $event->title }}</h4>
-                    <p class="card-description">{{ Str::limit($event->description, 100, '...') }}</p>
+                    <p class="card-description">{{ Str::limit($event->description, 10, '...') }}</p>
                     <p class="card-participantes">{{ count($event->users) }} participantes</p>
                     <a href="{{ route('event.show', $event->id) }}" class="btn btn-primary">Saiba mais</a>
                 </div>

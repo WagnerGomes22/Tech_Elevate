@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Event;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Http\Request;
@@ -48,14 +49,13 @@ class EventsController extends Controller
             'description.string' => 'O campo descrição deve ser uma string',
             'image.required' => 'O campo imagem é obrigatório',
             'image.image' => 'O campo imagem deve ser uma imagem',
-            'image.max' => 'O campo imagem deve ter no máximo 2MB',
         ];
         $request->validate([
             'title' => 'required|string|max:255',
             'date' => 'required|date',
             'city' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|max:2048',
         ],  $mensagem);
 
         $event = new Event;
@@ -145,35 +145,30 @@ class EventsController extends Controller
             'date' => 'required|date',
             'city' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|max:2048',
         ]);
 
-        $event->tech_tags = $request->tech_tags ?? [];
+
         // Atualiza os dados básicos
         $event->fill($request->only(['title', 'city', 'description', 'date']));
         $event->items = $request->items ?? [];
-
+        $event->tech_tags = $request->tech_tags ?? [];
         // Verifica se uma nova imagem foi enviada
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            try {
-                // Remove a imagem antiga se existir
-                if ($event->image && file_exists(public_path('img/events/' . $event->image))) {
-                    unlink(public_path('img/events/' . $event->image));
-                }
-
-                $requestImage = $request->file('image');
-                $extension = $requestImage->extension();
-                $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-                $requestImage->move(public_path('img/events'), $imageName);
-                $event->image = $imageName;
-            } catch (\Exception $e) {
-                return redirect()
-                    ->back()
-                    ->with('error', 'Erro ao fazer upload da imagem: ' . $e->getMessage());
+            // Remove a imagem antiga se existir
+            if ($event->image && file_exists(public_path('img/events/' . $event->image))) {
+                unlink(public_path('img/events/' . $event->image));
             }
+
+            $requestImage = $request->file('image');
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/events'), $imageName);
+            $event->image = $imageName;
         }
 
+        // Salva o evento
         $event->save();
 
         return redirect()
