@@ -21,15 +21,43 @@
         <div class="container-form">
             <form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                    <label for="image">Imagem do Evento:</label>
-                    <input type="file" class="form-control-file" id="image" name="image" required>
+                <div class="form-group mb-3">
+                    <label for="image" class="form-label">Imagem do Evento:</label>
+
+                    <input type="file" class="form-control" id="image" name="image" required onchange="previewImage(this)">
+                    <small class="form-text text-primary fw-bold">Escolha uma imagem para o seu evento (obrigatório).</small>
+
+                    <div class="mt-2" id="imagePreview" style="display: none;">
+                        <p class="mb-0 me-2 d-inline-block">Pré-visualização:</p>
+                        <img id="preview" src="#" alt="Pré-visualização da imagem" class="img-thumbnail" style="max-height: 100px;">
+                    </div>
+
                     @error('image')
                     <div class="text-danger">
                         {{ $message }}
                     </div>
                     @enderror
                 </div>
+
+                <script>
+                    function previewImage(input) {
+                        var preview = document.getElementById('preview');
+                        var previewDiv = document.getElementById('imagePreview');
+
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function(e) {
+                                preview.src = e.target.result;
+                                previewDiv.style.display = 'block';
+                            }
+
+                            reader.readAsDataURL(input.files[0]);
+                        } else {
+                            previewDiv.style.display = 'none';
+                        }
+                    }
+                </script>
                 <div class="mt-2 mb-2">
                     <label for="title" class="form-label">Evento</label>
                     <input type="text" name="title" class="form-control" id="title" placeholder="Digite o titulo do evento" value="{{ old('title') }}">
@@ -93,7 +121,7 @@
                         </div>
                         @enderror
                     </div>
-                    
+
                     <div class="col-md-6">
                         <label class="form-label">Tags de Tecnologia:</label>
                         <div class="form-group">

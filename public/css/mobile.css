@@ -45,18 +45,19 @@
     }
     
     .swiper-slide {
-        width: 80%;
-        height: auto;
+        width: 100%;
+       
         display: flex;
         justify-content: center;
     }
     
     .swiper-slide .card {
         width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        height: auto;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        height: 500px; /* Ajuste conforme necessário */
+        display: flex;
+        
+
+      
     }
     
     /* Swiper navigation */

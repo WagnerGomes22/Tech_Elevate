@@ -85,7 +85,7 @@
         </div>
     </main>
     <footer>
-        <p>TECH Elevate &copy; 2024</p>
+        <p>TECH Elevate &copy; 2025</p>
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
