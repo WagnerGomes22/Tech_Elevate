@@ -6,22 +6,22 @@ use Illuminate\Support\Str;
 use App\Models\Event;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Http\Request;
+use App\Services\EventService;
 
 class EventsController extends Controller
 {
+    protected $eventService;
+
+    public function __construct(EventService $eventService)
+    {
+        $this->eventService = $eventService;
+    }
+
     public function index(Request $request)
-
-
     {
         $search = $request->input('search');
-
-        if ($search) {
-
-            $events = Event::where('title', 'like', '%' . $search . '%')->get();
-        } else {
-            $events = Event::all();
-        }
-
+        
+        $events = $this->eventService->getAllEvents($search);
 
         return view(
             'welcome',
@@ -58,40 +58,19 @@ class EventsController extends Controller
             'image' => 'required|image|max:2048',
         ],  $mensagem);
 
-        $event = new Event;
-        $event->fill($request->only(['title', 'city', 'description', 'date']));
-        $event->items = $request->items ?? [];
-
-        $event->tech_tags = $request->tech_tags ?? [];
-
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $requestImage = $request->file('image');
-            $extension = $requestImage->extension();
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-            // Salva a imagem diretamente na pasta public
-            $requestImage->move(public_path('img/events'), $imageName);
-
-            $event->image = $imageName;
-        }
-
-        $event->user_id = auth()->id();
-        $event->save();
+        $this->eventService->createEvent(
+            $request->all(),
+            $request->file('image'),
+            auth()->id()
+        );
 
         return redirect('/')->with('mensagem', 'Evento cadastrado com sucesso!');
     }
 
-
-
-
     public function show($id)
     {
+        $event = $this->eventService->getEventById($id);
 
-        $event = Event::findOrFail($id);
-
-        $event->items = $event->items ?? [];
-
-        $user = auth()->user();
         $hasUserJoined = false;
         if (auth()->check()) {
             $user = auth()->user();
@@ -104,14 +83,11 @@ class EventsController extends Controller
         ]);
     }
 
-
-
     public function dashboard()
     {
         $user = auth()->user();
 
         $events = $user->events;
-
         $eventsParticipant = $user->eventsParticipant;
 
         return view('events.dashboard', ['events' => $events, 'eventsParticipant' => $eventsParticipant]);
@@ -119,7 +95,7 @@ class EventsController extends Controller
 
     public function destroy($id)
     {
-        Event::findOrFail($id)->delete();
+        $this->eventService->deleteEvent($id);
 
         return redirect()->route('events.dashboard')->with('msg', 'Deletado com sucesso!');
     }
@@ -127,7 +103,7 @@ class EventsController extends Controller
     public function edit($id)
     {
         $user = auth()->user();
-        $event = Event::findOrFail($id);
+        $event = $this->eventService->getEventById($id);
 
         if ($user->id != $event->user_id) {
             return redirect('/dashboard');
@@ -137,8 +113,6 @@ class EventsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $event = Event::findOrFail($id);
-
         // Validação
         $request->validate([
             'title' => 'required|string|max:255',
@@ -148,28 +122,11 @@ class EventsController extends Controller
             'image' => 'required|image|max:2048',
         ]);
 
-
-        // Atualiza os dados básicos
-        $event->fill($request->only(['title', 'city', 'description', 'date']));
-        $event->items = $request->items ?? [];
-        $event->tech_tags = $request->tech_tags ?? [];
-        // Verifica se uma nova imagem foi enviada
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            // Remove a imagem antiga se existir
-            if ($event->image && file_exists(public_path('img/events/' . $event->image))) {
-                unlink(public_path('img/events/' . $event->image));
-            }
-
-            $requestImage = $request->file('image');
-            $extension = $requestImage->extension();
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
-            $requestImage->move(public_path('img/events'), $imageName);
-            $event->image = $imageName;
-        }
-
-        // Salva o evento
-        $event->save();
+        $this->eventService->updateEvent(
+            $id, 
+            $request->all(), 
+            $request->file('image')
+        );
 
         return redirect()
             ->route('events.dashboard')
@@ -178,24 +135,16 @@ class EventsController extends Controller
 
     public function joinEvent($id)
     {
-
-        $user = auth()->user();
-
-        $user->eventsParticipant()->attach($id);
-
-        $event = Event::findOrFail($id);
-
+        $event = $this->eventService->getEventById($id);
+        $this->eventService->joinEvent($id, auth()->user());
 
         return redirect('/dashboard')->with('msg', 'Você esta participando do evento: ' . $event->title);
     }
 
     public function leaveEvent($id)
     {
-        $user = auth()->user();
-
-        $user->eventsParticipant()->detach($id);
-
-        $event = Event::findOrFail($id);
+        $event = $this->eventService->getEventById($id);
+        $this->eventService->leaveEvent($id, auth()->user());
 
         return redirect('/dashboard')->with('msg', 'Você saiu do evento: ' . $event->title);
     }
